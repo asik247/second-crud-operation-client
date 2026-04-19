@@ -2,9 +2,12 @@ import React, { use, useState } from 'react';
 import { data } from 'react-router';
 
 const UsersInfo = ({fetchUersInfo}) => {
+    //! fetch db all data in find using;
     const initialUsers = use(fetchUersInfo)
+    // ! useStae code here;
     const [users,setUsers] = useState(initialUsers)
-    console.log(initialUsers);
+    // console.log(initialUsers);
+    // TODO handlePost;
     const handlePost = (e)=>{
         e.preventDefault()
         const name = e.target.name.value;
@@ -28,6 +31,7 @@ const UsersInfo = ({fetchUersInfo}) => {
         })
         
     }
+    // TODO handleDetele;
     return (
         <div>
             <div className="hero bg-base-200 min-h-screen">
@@ -48,7 +52,7 @@ const UsersInfo = ({fetchUersInfo}) => {
                             </form>
                             {/* show db all data in ui */}
                             <div>
-                                {users.map(user=><p key={user._id}>{user.name}</p>)}
+                                {users.map(user=><p key={user._id}>{user.name} : {user.email}<button className='btn btn-primary'>x</button></p>  )}
                             </div>
                         </div>
                     </div>
