@@ -1,4 +1,5 @@
 import React from 'react';
+import { data } from 'react-router';
 
 const UsersInfo = () => {
     const handlePost = (e)=>{
@@ -7,6 +8,18 @@ const UsersInfo = () => {
         const email = e.target.email.value;
         const userValue = {name,email}
         console.log("handlePost clicked",userValue);
+        fetch("http://localhost:3000/users",{
+            method:"POST",
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(userValue)
+        }).then(res=>res.json()).then(data=>{
+            if(data.insertedId){
+                console.log("after db data",data)
+                alert("post db data successfully")
+            }
+        })
         
     }
     return (
