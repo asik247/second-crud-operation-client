@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { use, useState } from 'react';
 import { data } from 'react-router';
 
-const UsersInfo = () => {
+const UsersInfo = ({fetchUersInfo}) => {
+    const initialUsers = use(fetchUersInfo)
+    const [users,setUsers] = useState(initialUsers)
+    console.log(initialUsers);
     const handlePost = (e)=>{
         e.preventDefault()
         const name = e.target.name.value;
@@ -18,6 +21,9 @@ const UsersInfo = () => {
             if(data.insertedId){
                 console.log("after db data",data)
                 alert("post db data successfully")
+                userValue._id = data.insertedId;
+                const updateUsers = [...users,userValue]
+                setUsers(updateUsers)
             }
         })
         
@@ -40,6 +46,10 @@ const UsersInfo = () => {
                                     <button className="btn btn-neutral mt-4">Add</button>
                                 </fieldset>
                             </form>
+                            {/* show db all data in ui */}
+                            <div>
+                                {users.map(user=><p key={user._id}>{user.name}</p>)}
+                            </div>
                         </div>
                     </div>
                 </div>
